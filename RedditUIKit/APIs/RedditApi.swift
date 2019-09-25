@@ -29,7 +29,7 @@ extension RedditApi {
             self.id = id
             self.path += "\(topic)/\(id).json"
         }
-        
+/*
         var queryParameters: [String: Any]? {
             var params = [String: Any]()
             if(id == ""){
@@ -46,7 +46,7 @@ extension RedditApi {
             return fields;
         }
         
-/*
+
         var parameters: Any? {
             var params = [String: Any]()
             params["limit"] = 15
@@ -67,16 +67,8 @@ extension RedditApi {
                 return res.data.children;
             }
             catch{
-                do{
-                    let res = try JSONDecoder().decode(DetialListing.self, from: data)
-                    if(res.count > 0){
-                        print("Gotcha!");
-                    }
-                }
-                catch{
                     let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"
                     print(string1)
-                }
             }
             return []
         }

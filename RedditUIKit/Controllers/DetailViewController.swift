@@ -34,29 +34,14 @@ final class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
-        
-        viewModel.outputs.redditListings
-        .observeOn(MainScheduler.instance)
-        .bind(to: tableView.rx.items) { collectionView, row, post in
-            return ListViewController.getCustomCell(post);
+/*
+        viewModel.outputs.coments
+            .observeOn(MainScheduler.instance)
+            .bind(to: tableView.rx.items) { tableView, row, comment in
+            return ListViewController.getCustomCell(comment);
         }
         .disposed(by: disposeBag)
-        
-        viewModel.outputs.isLoading
-            .observeOn(MainScheduler.instance)
-            .bind(to: indicatorView.rx.isAnimating)
-            .disposed(by: disposeBag)
-
-        viewModel.outputs.isLoading
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: $0 ? 50 : 0, right: 0)
-            })
-            .disposed(by: disposeBag)
-        
-        
-        
-        viewModel.inputs.fetchTrigger.onNext(())
+ */
     }
     static func getCustomCell(_ post: PostData ) -> UITableViewCell{
         let cell = UITableViewCell(style: .default, reuseIdentifier: "subtitle")

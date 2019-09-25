@@ -11,13 +11,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension ObservableType where E: OptionalType {
-    func filterNil() -> Observable<E.Wrapped> {
-        return self.flatMap { element -> Observable<E.Wrapped> in
+extension ObservableType where Element: OptionalType {
+    func filterNil() -> Observable<Element.Wrapped> {
+        return self.flatMap { element -> Observable<Element.Wrapped> in
             guard let value = element.value else {
-                return Observable<E.Wrapped>.empty()
+                return Observable<Element.Wrapped>.empty()
             }
-            return Observable<E.Wrapped>.just(value)
+            return Observable<Element.Wrapped>.just(value)
         }
     }
 }
