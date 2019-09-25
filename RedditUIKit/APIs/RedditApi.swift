@@ -27,16 +27,23 @@ extension RedditApi {
             self.topic = topic
             self.page = page
             self.id = id
-            if(id != ""){
-                
-            }
             self.path += "\(topic)/\(id).json"
         }
         
         var queryParameters: [String: Any]? {
             var params = [String: Any]()
-            params["raw_json"] = "1"
+            if(id == ""){
+                    params["raw_json"] = "1"
+            }
             return params
+        }
+        
+        var headerFields: [String: String] {
+            var fields = [String: String]()
+            if(id != ""){
+                    fields["Accept"] = "application/json"
+            }
+            return fields;
         }
         
 /*
