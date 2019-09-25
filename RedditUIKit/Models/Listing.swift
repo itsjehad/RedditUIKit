@@ -7,6 +7,14 @@
 //
 
 import Foundation
+
+struct ListingList: Decodable {
+    let data: ListingData
+    struct ListingData: Decodable {
+        let children: [Listing]
+    }
+}
+
 struct Listing: Decodable {
     let data: ListingData
     struct ListingData: Decodable {

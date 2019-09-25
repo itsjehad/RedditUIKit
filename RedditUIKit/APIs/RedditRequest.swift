@@ -11,6 +11,8 @@ import APIKit
 
 protocol RedditRequest: Request {}
 
+protocol RedditDetailRequest: RedditRequest {}
+
 extension RedditRequest {
     var baseURL: URL {
         return URL(string: "https://www.reddit.com")!
@@ -37,6 +39,25 @@ struct DecodableDataParser: DataParser {
 }
 
 extension RedditRequest where Response: Decodable {
+    var dataParser: DataParser {
+        return DecodableDataParser()
+    }
+
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        guard let data = object as? Data else {
+            throw ResponseError.unexpectedObject(object)
+        }
+        return try JSONDecoder().decode(Response.self, from: data)
+    }
+    func detailResponse(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        guard let data = object as? Data else {
+            throw ResponseError.unexpectedObject(object)
+        }
+        return try JSONDecoder().decode(Response.self, from: data)
+    }
+}
+
+extension RedditDetailRequest where Response: Decodable {
     var dataParser: DataParser {
         return DecodableDataParser()
     }

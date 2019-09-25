@@ -1,61 +1,67 @@
 //
-//  ListViewModel.swift
+//  DetailViewModel.swift
 //  RedditUIKit
 //
-//  Created by Jehad Sarkar on 2019-09-23.
+//  Created by Jehad Sarkar on 2019-09-24.
 //  Copyright © 2019 itsjehad. All rights reserved.
 //
 
-import UIKit
+
 import RxCocoa
 import RxSwift
 import Action
 import APIKit
 
-protocol ListViewModelInputs {
+protocol DetailViewModelInputs {
     var fetchTrigger: PublishSubject<Void> { get }
-    var reachedBottomTrigger: PublishSubject<Void> { get }
 }
 
-protocol ListViewModelOutputs {
+protocol DetailViewModelOutputs {
+    var post: PostData { get }
+    var request: URLRequest { get }
     var navigationBarTitle: Observable<String> { get }
     var redditListings: Observable<[PostData]> { get }
     var isLoading: Observable<Bool> { get }
     var error: Observable<NSError> { get }
+    //var methdaData: Observable<String>{get}
+    //var comments: Observable<String>{get}
 }
 
-protocol ListViewModelType {
-    var inputs: ListViewModelInputs { get }
-    var outputs: ListViewModelOutputs { get }
+protocol DetailViewModelType {
+    var inputs: DetailViewModelInputs { get }
+    var outputs: DetailViewModelOutputs { get }
 }
 
-final class ListViewModel: ListViewModelType, ListViewModelInputs, ListViewModelOutputs {
-    private let topic: String = "swift"
+final class DetailViewModel: DetailViewModelType, DetailViewModelInputs, DetailViewModelOutputs {
     var redditListings: Observable<[PostData]>
-    
-    
-
-    var inputs: ListViewModelInputs { return self }
-    var outputs: ListViewModelOutputs { return self }
+    var inputs: DetailViewModelInputs { return self }
+    var outputs: DetailViewModelOutputs { return self }
 
     // MARK: - Inputs
-    let fetchTrigger = PublishSubject<Void>()
-    let reachedBottomTrigger = PublishSubject<Void>()
-    private let page = BehaviorRelay<Int>(value: 1)
 
     // MARK: - Outputs
+    let post: PostData
+    let request: URLRequest
     let navigationBarTitle: Observable<String>
+    
     let isLoading: Observable<Bool>
     let error: Observable<NSError>
     var after = ""
 
     private let searchAction: Action<Int, [PostData]>
+    private let page = BehaviorRelay<Int>(value: 1)
+    let fetchTrigger = PublishSubject<Void>()
+    
+
     private let disposeBag = DisposeBag()
 
-    init(topic: String) {
-        self.navigationBarTitle = Observable.just("\(topic) news")
+    init(post: PostData) {
+        self.post = post
+        self.request = URLRequest(url: URL(string: post.data.url)!)
+        self.navigationBarTitle = Observable.just(post.data.title)
+        
         self.searchAction = Action { page in
-            return Session.shared.rx.response(RedditApi.SearchRequest(topic: topic, page: page))
+            return Session.shared.rx.response(RedditApi.SearchRequest(topic: post.data.subreddit, page: page, id: post.data.id))
         }
         let response = BehaviorRelay<[PostData]>(value: [])
         self.redditListings = response.asObservable()
@@ -70,25 +76,13 @@ final class ListViewModel: ListViewModelType, ListViewModelInputs, ListViewModel
             .bind(to: response)
             .disposed(by: disposeBag)
 
-        searchAction.elements
-            .withLatestFrom(page)
-            .map { $0 + 1 }
-            .bind(to: page)
-            .disposed(by: disposeBag)
-
         fetchTrigger
             .withLatestFrom(page)
             .bind(to: searchAction.inputs)
             .disposed(by: disposeBag)
-
-        reachedBottomTrigger
-            .withLatestFrom(isLoading)
-            .filter { !$0 }
-            .withLatestFrom(page)
-            .filter { $0 < 5 }
-            .bind(to: searchAction.inputs)
-            .disposed(by: disposeBag)
+        
     }
 
 }
+
 

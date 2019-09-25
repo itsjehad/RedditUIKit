@@ -14,6 +14,7 @@ target 'RedditUIKit' do
   pod 'Action'
   pod 'RxWebKit'
   pod 'APIKit'
+  pod 'SnapKit', '~> 5.0.0'
 
 
   target 'RedditUIKitTests' do

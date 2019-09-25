@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n5P-gX-STW">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail View Controller-->
+        <scene sceneID="oTp-4t-iZV">
+            <objects>
+                <viewController id="n5P-gX-STW" customClass="DetailViewController" customModule="RedditUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LBy-3Q-wx1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uud-Dt-ESb">
+                                <rect key="frame" x="0.0" y="22" width="414" height="852"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ciR-BR-OBd">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerY" secondItem="ciR-BR-OBd" secondAttribute="centerY" id="2iV-sT-3TW"/>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerY" secondItem="LBy-3Q-wx1" secondAttribute="centerY" id="B0y-t7-9YY"/>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerX" secondItem="LBy-3Q-wx1" secondAttribute="centerX" id="L6m-13-qMk"/>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerX" secondItem="ciR-BR-OBd" secondAttribute="centerX" id="k40-lC-4Se"/>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="leading" secondItem="OaZ-vL-DMn" secondAttribute="leading" id="yQ8-1O-hg4"/>
+                            <constraint firstItem="uud-Dt-ESb" firstAttribute="top" secondItem="LBy-3Q-wx1" secondAttribute="topMargin" constant="-22" id="yen-vL-JgH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OaZ-vL-DMn"/>
+                    </view>
+                    <connections>
+                        <outlet property="indicatorView" destination="ciR-BR-OBd" id="aEv-cb-SXF"/>
+                        <outlet property="tableView" destination="uud-Dt-ESb" id="lQo-Kp-T0a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4By-Ak-Fvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="279.71014492753625" y="-244.41964285714283"/>
+        </scene>
+    </scenes>
+</document>

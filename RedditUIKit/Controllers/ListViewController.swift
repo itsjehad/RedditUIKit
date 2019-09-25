@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Kingfisher
+import SnapKit
 
 final class ListViewController: UIViewController {
 
@@ -27,7 +28,8 @@ final class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //tableView.estimatedRowHeight = 120
+        //tableView.rowHeight = UITableView.automaticDimension
         // Bind ViewModel Outputs
         viewModel.outputs.navigationBarTitle
             .observeOn(MainScheduler.instance)
@@ -37,39 +39,18 @@ final class ListViewController: UIViewController {
         viewModel.outputs.redditListings
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, post in
-                let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "subtitle")
-                let imageUrl =  URL(string: post.data.thumbnail)
-                
-                cell.imageView?.kf.setImage(with: imageUrl) { result in
-                    switch result {
-                    case .success(let value):
-                        cell.setNeedsLayout()
-                        print("Image: \(value.image). Got from: \(value.cacheType)")
-                    case .failure(let error):
-                        print("Error: \(error)")
-                    }
-                }
-        
-                cell.textLabel?.text = "\(post.data.title)"
-                cell.detailTextLabel?.textColor = UIColor.lightGray
-                if post.data.url.contains("reddit") {
-                    cell.detailTextLabel?.text = post.data.selftext != "" ? post.data.selftext : " "
-                } else {
-                    cell.detailTextLabel?.text = post.data.url
-                }
-                return cell
+                return ListViewController.getCustomCell(post);
             }
             .disposed(by: disposeBag)
 
-/*
-        tableView.rx.modelSelected(Post.self)
+
+        tableView.rx.modelSelected(PostData.self)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 let vc = DetailViewController.make(with: DetailViewModel(post: $0))
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
-*/
         viewModel.outputs.isLoading
             .observeOn(MainScheduler.instance)
             .bind(to: indicatorView.rx.isAnimating)
@@ -91,13 +72,13 @@ final class ListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        /*
-
+        
+/*
         // Bind ViewModel Inputs
         tableView.rx.reachedBottom.asObservable()
             .bind(to: viewModel.inputs.reachedBottomTrigger)
             .disposed(by: disposeBag)
-        */
+*/
         viewModel.inputs.fetchTrigger.onNext(())
         
     }
@@ -108,6 +89,36 @@ final class ListViewController: UIViewController {
             self?.tableView.deselectRow(at: $0, animated: true)
         }
     }
+    static func getCustomCell(_ post: PostData ) -> UITableViewCell{
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "subtitle")
+        let imageUrl =  URL(string: post.data.thumbnail)
+        
+        cell.imageView?.kf.setImage(with: imageUrl) { result in
+            switch result {
+            case .success(let value):
+                cell.setNeedsLayout()
+                print("Image URL: \(String(describing: imageUrl)) Image: \(value.image). Got from: \(value.cacheType)")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        
+        cell.textLabel?.text = "\(post.data.title)"
+        cell.textLabel?.numberOfLines = 0;
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //let image = images[indexPath.row].image
+        //let aspectRatioImg = image.size.height / image.size.width
+
+        //return view.bounds.width * aspectRatioImg + 103
+        return 200
+    
+    }
 }
+
+
 
 extension ListViewController: StoryboardInstantiable {}

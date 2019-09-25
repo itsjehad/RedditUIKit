@@ -18,15 +18,35 @@ extension RedditApi {
 
         // MARK: - Initialize
         let topic: String
-        let id: Int
+        let id: String
+        let page: Int
+        var after: String?
         var path: String = "/r/"
 
-        init(topic: String = "swift", page: Int) {
+        init(topic: String = "swift", page: Int, id: String = "") {
             self.topic = topic
-            self.id = page
-            self.path += "\(topic)/.json"
+            self.page = page
+            self.id = id
+            if(id != ""){
+                
+            }
+            self.path += "\(topic)/\(id).json"
         }
-
+        
+        var queryParameters: [String: Any]? {
+            var params = [String: Any]()
+            params["raw_json"] = "1"
+            return params
+        }
+        
+/*
+        var parameters: Any? {
+            var params = [String: Any]()
+            params["limit"] = 15
+            params["after"] = after
+            return params
+        }
+*/
         // MARK: - Request Type
         let method: HTTPMethod = .get
         
@@ -35,9 +55,23 @@ extension RedditApi {
             guard let data = object as? Data else {
                 throw ResponseError.unexpectedObject(object)
             }
-            let res = try JSONDecoder().decode(Listing.self, from: data)
-            return res.data.children;
+            do{
+                let res = try JSONDecoder().decode(Listing.self, from: data)
+                return res.data.children;
+            }
+            catch{
+                do{
+                    let res = try JSONDecoder().decode(DetialListing.self, from: data)
+                    if(res.count > 0){
+                        print("Gotcha!");
+                    }
+                }
+                catch{
+                    let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+                    print(string1)
+                }
+            }
+            return []
         }
     }
-
 }

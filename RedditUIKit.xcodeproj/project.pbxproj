@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		8413E1ED2B2FE3BF22A2F896 /* Pods_RedditUIKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4E73332CE7559EB945FEE0 /* Pods_RedditUIKitTests.framework */; };
 		A51A6E612339BCF000764052 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A51A6E602339BCF000764052 /* Podfile */; };
+		A51A6E66233ACBFF00764052 /* CustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A51A6E65233ACBFF00764052 /* CustomCellView.xib */; };
+		A51A6E68233ACC5F00764052 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A6E67233ACC5F00764052 /* CustomViewCell.swift */; };
+		A51A6E6B233ADB6500764052 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A6E69233ADB6500764052 /* DetailViewController.swift */; };
+		A51A6E6C233ADB6500764052 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A6E6A233ADB6500764052 /* DetailViewModel.swift */; };
+		A51A6E6E233ADD4000764052 /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51A6E6D233ADD4000764052 /* DetailViewController.storyboard */; };
+		A51A6E72233B119900764052 /* DetailListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A6E71233B119800764052 /* DetailListing.swift */; };
 		A58C1F3B233974E4005C8762 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C1F3A233974E4005C8762 /* AppDelegate.swift */; };
 		A58C1F3D233974E4005C8762 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C1F3C233974E4005C8762 /* SceneDelegate.swift */; };
 		A58C1F3F233974E4005C8762 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C1F3E233974E4005C8762 /* ViewController.swift */; };
@@ -59,6 +65,12 @@
 		687E217B9EA7F808B41D8BE8 /* Pods-RedditUIKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditUIKitTests.debug.xcconfig"; path = "Target Support Files/Pods-RedditUIKitTests/Pods-RedditUIKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		92BA39E8202A730B637B8387 /* Pods-RedditUIKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditUIKitTests.release.xcconfig"; path = "Target Support Files/Pods-RedditUIKitTests/Pods-RedditUIKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A51A6E602339BCF000764052 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		A51A6E65233ACBFF00764052 /* CustomCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellView.xib; sourceTree = "<group>"; };
+		A51A6E67233ACC5F00764052 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
+		A51A6E69233ADB6500764052 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A51A6E6A233ADB6500764052 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		A51A6E6D233ADD4000764052 /* DetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
+		A51A6E71233B119800764052 /* DetailListing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailListing.swift; sourceTree = "<group>"; };
 		A58C1F37233974E4005C8762 /* RedditUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58C1F3A233974E4005C8762 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A58C1F3C233974E4005C8762 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +137,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A51A6E64233ACBF400764052 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A51A6E65233ACBFF00764052 /* CustomCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A58C1F2E233974E4005C8762 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +171,7 @@
 		A58C1F39233974E4005C8762 /* RedditUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				A51A6E64233ACBF400764052 /* Views */,
 				A5AC91202339832C007A1F60 /* Extensions */,
 				A5AC911723397B20007A1F60 /* ViewModels */,
 				A5AC911523397B02007A1F60 /* Controllers */,
@@ -187,6 +208,7 @@
 		A58C1F6B233976DD005C8762 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A51A6E71233B119800764052 /* DetailListing.swift */,
 				A58C1F6D23397774005C8762 /* Comment.swift */,
 				A58C1F6E23397774005C8762 /* Listing.swift */,
 				A58C1F6C23397774005C8762 /* Post.swift */,
@@ -206,6 +228,8 @@
 		A5AC911523397B02007A1F60 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A51A6E6D233ADD4000764052 /* DetailViewController.storyboard */,
+				A51A6E69233ADB6500764052 /* DetailViewController.swift */,
 				A58C1F3E233974E4005C8762 /* ViewController.swift */,
 				A5AC911A23397B3F007A1F60 /* ListViewController.swift */,
 				A5AC911823397B37007A1F60 /* ListViewController.storyboard */,
@@ -216,6 +240,8 @@
 		A5AC911723397B20007A1F60 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A51A6E6A233ADB6500764052 /* DetailViewModel.swift */,
+				A51A6E67233ACC5F00764052 /* CustomViewCell.swift */,
 				A5AC911C23397B45007A1F60 /* ListViewModel.swift */,
 			);
 			path = ViewModels;
@@ -357,11 +383,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51A6E6E233ADD4000764052 /* DetailViewController.storyboard in Resources */,
 				A51A6E612339BCF000764052 /* Podfile in Resources */,
 				A58C1F47233974E4005C8762 /* LaunchScreen.storyboard in Resources */,
 				A58C1F44233974E4005C8762 /* Assets.xcassets in Resources */,
 				A58C1F42233974E4005C8762 /* Main.storyboard in Resources */,
 				A5AC911923397B37007A1F60 /* ListViewController.storyboard in Resources */,
+				A51A6E66233ACBFF00764052 /* CustomCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,10 +526,14 @@
 				A58C1F7223397774005C8762 /* Listing.swift in Sources */,
 				A5AC911F23397F56007A1F60 /* RedditRequest.swift in Sources */,
 				A5AC91242339833A007A1F60 /* StoryboardInstantiable.swift in Sources */,
+				A51A6E68233ACC5F00764052 /* CustomViewCell.swift in Sources */,
 				A5AC911B23397B3F007A1F60 /* ListViewController.swift in Sources */,
 				A58C1F7023397774005C8762 /* Post.swift in Sources */,
+				A51A6E72233B119900764052 /* DetailListing.swift in Sources */,
+				A51A6E6B233ADB6500764052 /* DetailViewController.swift in Sources */,
 				A5AC91252339833A007A1F60 /* RxHelpers.swift in Sources */,
 				A5AC91262339833A007A1F60 /* SessionExtension.swift in Sources */,
+				A51A6E6C233ADB6500764052 /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

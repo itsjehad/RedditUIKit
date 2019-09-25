@@ -15,6 +15,7 @@ PODS:
   - RxWebKit (1.0.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
+  - SnapKit (5.0.0)
 
 DEPENDENCIES:
   - Action
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - RxSwift
   - RxTest
   - RxWebKit
+  - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - RxWebKit
+    - SnapKit
 
 SPEC CHECKSUMS:
   Action: 0d14986aad0f1330aa27ce65d0cdeaacbb63d91c
@@ -45,7 +48,8 @@ SPEC CHECKSUMS:
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   RxTest: 4349afe98f564e0a9bc19063368904622d17d49a
   RxWebKit: 9ff7ea0780a093450defc7ff13e218678ebe6e4a
+  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
 
-PODFILE CHECKSUM: 98dcc7f2db4ad3c4c4e97dc897fb58dc3c8aa6cb
+PODFILE CHECKSUM: ad9d4487841cd8e6338b879730cc186f67da7a9f
 
 COCOAPODS: 1.7.1
