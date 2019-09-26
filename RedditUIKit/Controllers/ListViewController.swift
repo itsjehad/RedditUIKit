@@ -39,7 +39,7 @@ final class ListViewController: UIViewController {
         viewModel.outputs.redditListings
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, post in
-                return ListViewController.getCustomCell(post);
+                return ViewControllerHelper.getCustomCell(post);
             }
             .disposed(by: disposeBag)
 
@@ -88,25 +88,6 @@ final class ListViewController: UIViewController {
         tableView.indexPathsForSelectedRows?.forEach { [weak self] in
             self?.tableView.deselectRow(at: $0, animated: true)
         }
-    }
-    static func getCustomCell(_ post: PostData ) -> UITableViewCell{
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "subtitle")
-        let imageUrl =  URL(string: post.data.thumbnail)
-        
-        cell.imageView?.kf.setImage(with: imageUrl) { result in
-            switch result {
-            case .success(let value):
-                cell.setNeedsLayout()
-                print("Image URL: \(String(describing: imageUrl)) Image: \(value.image). Got from: \(value.cacheType)")
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
-        
-        cell.textLabel?.text = "\(post.data.title)"
-        cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -32,8 +32,6 @@ protocol ListViewModelType {
 final class ListViewModel: ListViewModelType, ListViewModelInputs, ListViewModelOutputs {
     private let topic: String = "swift"
     var redditListings: Observable<[PostData]>
-    
-    
 
     var inputs: ListViewModelInputs { return self }
     var outputs: ListViewModelOutputs { return self }

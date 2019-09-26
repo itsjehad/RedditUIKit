@@ -12,7 +12,11 @@ import RxSwift
 import WebKit
 import RxWebKit
 
+
+
 final class DetailViewController: UIViewController {
+    
+    let detailTextViewFontSize: CGFloat = 16
 
     static func make(with viewModel: DetailViewModel) -> DetailViewController {
         let view = DetailViewController.instantiate()
@@ -22,46 +26,38 @@ final class DetailViewController: UIViewController {
 
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var tableView: UITableView!
-    //@IBOutlet private weak var webView: WKWebView!
 
     private var viewModel: DetailViewModelType!
     private let disposeBag = DisposeBag()
-
+    
+    
+    @IBOutlet weak var selfTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let observableItems = Observable<[PostData]>.just([self.viewModel.outputs.post, self.viewModel.outputs.post])
         
         viewModel.outputs.navigationBarTitle
             .observeOn(MainScheduler.instance)
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
-/*
-        viewModel.outputs.coments
-            .observeOn(MainScheduler.instance)
-            .bind(to: tableView.rx.items) { tableView, row, comment in
-            return ListViewController.getCustomCell(comment);
-        }
-        .disposed(by: disposeBag)
- */
-    }
-    static func getCustomCell(_ post: PostData ) -> UITableViewCell{
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "subtitle")
-        let imageUrl =  URL(string: post.data.thumbnail)
         
-        cell.imageView?.kf.setImage(with: imageUrl) { result in
-            switch result {
-            case .success(let value):
-                cell.setNeedsLayout()
-                print("Image URL: \(String(describing: imageUrl)) Image: \(value.image). Got from: \(value.cacheType)")
-            case .failure(let error):
-                print("Error: \(error)")
+        observableItems
+        .observeOn(MainScheduler.instance)
+        .bind(to: tableView.rx.items) { tableView, row, post in
+            if(row == 0){
+                let cell = ViewControllerHelper.getCustomCell(post);
+                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: self.detailTextViewFontSize)
+                return cell
+            }
+            else{
+                return ViewControllerHelper.getDetailCell(post);
             }
         }
-        
-        cell.textLabel?.text = "\(post.data.title)"
-        cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        return cell
+        .disposed(by: disposeBag)
     }
+
 }
 
 extension DetailViewController: StoryboardInstantiable {}
+
+

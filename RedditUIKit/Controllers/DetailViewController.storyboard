@@ -16,28 +16,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uud-Dt-ESb">
-                                <rect key="frame" x="0.0" y="22" width="414" height="852"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6tM-vk-taW">
+                                <rect key="frame" x="10" y="54" width="394" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="OQD-Bj-cPD">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OQD-Bj-cPD" id="mhw-ia-DfU">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" id="HKD-uI-KuA">
+                                        <rect key="frame" x="0.0" y="71.5" width="394" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HKD-uI-KuA" id="yB9-xi-egP">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ciR-BR-OBd">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerY" secondItem="ciR-BR-OBd" secondAttribute="centerY" id="2iV-sT-3TW"/>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerY" secondItem="LBy-3Q-wx1" secondAttribute="centerY" id="B0y-t7-9YY"/>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerX" secondItem="LBy-3Q-wx1" secondAttribute="centerX" id="L6m-13-qMk"/>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="centerX" secondItem="ciR-BR-OBd" secondAttribute="centerX" id="k40-lC-4Se"/>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="leading" secondItem="OaZ-vL-DMn" secondAttribute="leading" id="yQ8-1O-hg4"/>
-                            <constraint firstItem="uud-Dt-ESb" firstAttribute="top" secondItem="LBy-3Q-wx1" secondAttribute="topMargin" constant="-22" id="yen-vL-JgH"/>
+                            <constraint firstItem="6tM-vk-taW" firstAttribute="top" secondItem="OaZ-vL-DMn" secondAttribute="top" constant="10" id="Dyb-8e-img"/>
+                            <constraint firstItem="OaZ-vL-DMn" firstAttribute="bottom" secondItem="6tM-vk-taW" secondAttribute="bottom" id="c5f-Zm-l1F"/>
+                            <constraint firstItem="6tM-vk-taW" firstAttribute="leading" secondItem="OaZ-vL-DMn" secondAttribute="leading" constant="10" id="inv-hA-nX2"/>
+                            <constraint firstItem="OaZ-vL-DMn" firstAttribute="trailing" secondItem="6tM-vk-taW" secondAttribute="trailing" constant="10" id="p9r-hQ-6ar"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OaZ-vL-DMn"/>
                     </view>
                     <connections>
-                        <outlet property="indicatorView" destination="ciR-BR-OBd" id="aEv-cb-SXF"/>
-                        <outlet property="tableView" destination="uud-Dt-ESb" id="lQo-Kp-T0a"/>
+                        <outlet property="tableView" destination="6tM-vk-taW" id="F57-7n-6nI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4By-Ak-Fvq" userLabel="First Responder" sceneMemberID="firstResponder"/>

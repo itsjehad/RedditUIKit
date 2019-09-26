@@ -16,8 +16,8 @@ protocol DetailViewModelInputs {
 }
 
 protocol DetailViewModelOutputs {
-    var coments: Observable<[Post]> { get }
     var navigationBarTitle: Observable<String> { get }
+    var post: PostData { get }
 }
 
 protocol DetailViewModelType {
@@ -28,19 +28,19 @@ protocol DetailViewModelType {
 final class DetailViewModel: DetailViewModelType, DetailViewModelInputs, DetailViewModelOutputs {
 
     
+    var post: PostData
+    
     var inputs: DetailViewModelInputs { return self }
     var outputs: DetailViewModelOutputs { return self }
-    let coments: Observable<[Post]>
+    
     
     let navigationBarTitle: Observable<String>
-    
-    
 
     private let disposeBag = DisposeBag()
 
     init(post: PostData) {
-        self.coments = Observable.just(post.data.replies ?? [])
         self.navigationBarTitle = Observable.just(post.data.title)
+        self.post = post
     }
 
 }
