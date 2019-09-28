@@ -104,25 +104,44 @@ class CalendarOverlapTests: XCTestCase {
     }
     func testPartialOverlap() {
         var events = [Event]()
-        events.append(Event(1, "test1", Date()-2, Date()+10))
-        events.append(Event(2, "test2", Date()-1, Date()+1))
-        events.append(Event(3, "test3", Date()-2, Date()+2))
-        events.append(Event(4, "test3", Date()+11, Date()+12))
-        events.append(Event(5, "test3", Date()+12.01, Date()+12.5))
+        let date = Date()
+        events.append(Event(1, "test1", date-2, date+10))
+        events.append(Event(2, "test2", date-1, date+1))
+        events.append(Event(3, "test3", date-2, date+2))
+        events.append(Event(4, "test3", date+11, date+12))
+        events.append(Event(5, "test3", date+12.01, date+12.5))
         let overlappingEvents = getOverlappedPairs(events)
         for event in overlappingEvents{
             print(event)
         }
         XCTAssertEqual(events[0...2].sorted(by: { $0.startTime < $1.startTime }), overlappingEvents)
     }
+    
+    func testNonSequentialPartialOverlap() {
+        var events = [Event]()
+        let date = Date()
+        events.append(Event(1, "test1", date, date+60))
+        events.append(Event(2, "test2", date+61, date+2*60))
+        events.append(Event(3, "test3", date, date+30))
+        events.append(Event(4, "test2", date+60+30, date+3*60))
+        events.append(Event(4, "test2", date+3*60+1, date+4*60))
+        
+        let overlappingEvents = getOverlappedPairs(events)
+        for event in overlappingEvents{
+            print(event)
+        }
+        let testEvents = [events[0], events[2], events[1], events[3]]
+        XCTAssertEqual(testEvents, overlappingEvents)
+    }
 
     func testAllOverlap() {
+        let date = Date()
         var events = [Event]()
-        events.append(Event(1, "test1", Date()-2, Date()+10))
-        events.append(Event(2, "test2", Date()-1, Date()+1))
-        events.append(Event(3, "test3", Date()-2, Date()+2))
-        events.append(Event(4, "test3", Date()+11, Date()+12))
-        events.append(Event(5, "test3", Date()+11, Date()+11.5))
+        events.append(Event(1, "test1", date-2, date+10))
+        events.append(Event(2, "test2", date-1, date+1))
+        events.append(Event(3, "test3", date-2, date+2))
+        events.append(Event(4, "test3", date+11, date+12))
+        events.append(Event(5, "test3", date+11, date+11.5))
         let overlappingEvents = getOverlappedPairs(events)
         for event in overlappingEvents{
             print(event)
@@ -131,12 +150,13 @@ class CalendarOverlapTests: XCTestCase {
     }
     
     func testNoOverlap() {
+        let date = Date()
         var events = [Event]()
-        events.append(Event(1, "test1", Date(), Date()+1))
-        events.append(Event(2, "test2", Date()+1.1, Date()+2))
-        events.append(Event(3, "test3", Date()+2.01, Date()+3))
-        events.append(Event(4, "test3", Date()+3.01, Date()+4))
-        events.append(Event(5, "test3", Date()+11, Date()+11.5))
+        events.append(Event(1, "test1", date, date+1))
+        events.append(Event(2, "test2", date+1.1, date+2))
+        events.append(Event(3, "test3", date+2.01, date+3))
+        events.append(Event(4, "test3", date+3.01, date+4))
+        events.append(Event(5, "test3", date+11, date+11.5))
         let overlappingEvents = getOverlappedPairs(events)
         for event in overlappingEvents{
             print(event)
