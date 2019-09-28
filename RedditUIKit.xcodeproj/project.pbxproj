@@ -35,6 +35,7 @@
 		A5AC91252339833A007A1F60 /* RxHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC91222339833A007A1F60 /* RxHelpers.swift */; };
 		A5AC91262339833A007A1F60 /* SessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC91232339833A007A1F60 /* SessionExtension.swift */; };
 		A5AFBFD5233C4378000D81C2 /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AFBFD4233C4378000D81C2 /* ViewControllerHelper.swift */; };
+		A5AFBFD7233EDDA8000D81C2 /* CalendarOverlapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AFBFD6233EDDA8000D81C2 /* CalendarOverlapTests.swift */; };
 		DB1D48942303409FBE8DD1BE /* Pods_RedditUIKitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFDE256BC09FBB9965136443 /* Pods_RedditUIKitUITests.framework */; };
 		E67D3B7BE8258C4E528FC2B4 /* Pods_RedditUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF778C8687ED42BBB607A10 /* Pods_RedditUIKit.framework */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		A5AC91222339833A007A1F60 /* RxHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxHelpers.swift; sourceTree = "<group>"; };
 		A5AC91232339833A007A1F60 /* SessionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionExtension.swift; sourceTree = "<group>"; };
 		A5AFBFD4233C4378000D81C2 /* ViewControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
+		A5AFBFD6233EDDA8000D81C2 /* CalendarOverlapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOverlapTests.swift; sourceTree = "<group>"; };
 		CFDE256BC09FBB9965136443 /* Pods_RedditUIKitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditUIKitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 			children = (
 				A58C1F51233974E5005C8762 /* RedditUIKitTests.swift */,
 				A58C1F53233974E5005C8762 /* Info.plist */,
+				A5AFBFD6233EDDA8000D81C2 /* CalendarOverlapTests.swift */,
 			);
 			path = RedditUIKitTests;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58C1F52233974E5005C8762 /* RedditUIKitTests.swift in Sources */,
+				A5AFBFD7233EDDA8000D81C2 /* CalendarOverlapTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
