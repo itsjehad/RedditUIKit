@@ -45,25 +45,25 @@ class CalendarOverlapTests: XCTestCase {
     func getOverlappedPairs(_ events: [Event]) -> [Event] {
         var overlappingEvents:[Event] = []
         if(events.count > 0){
-            let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //O(nlog(n))
+            let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //O(n log n))
             var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count)
-            var anEvent = sortedEvents[0];
+            var prvEvent = sortedEvents[0];
             var prvIndex = 0
             for index in 1..<sortedEvents.count{ //O(n)
-                if(anEvent.isOverlapping(sortedEvents[index])){
+                if(prvEvent.isOverlapping(sortedEvents[index])){
                     overlappedIndexes[prvIndex] = true
                     overlappedIndexes[index] = true
-                    if(anEvent.endTime < sortedEvents[index].endTime){
+                    if(prvEvent.endTime < sortedEvents[index].endTime){
                         prvIndex = index;
-                        anEvent = sortedEvents[index]
+                        prvEvent = sortedEvents[index]
                     }
                     else{
-                        anEvent.startTime = sortedEvents[index].startTime
+                        prvEvent.startTime = sortedEvents[index].startTime
                     }
                 }
                 else{
                     prvIndex = index;
-                    anEvent = sortedEvents[index]
+                    prvEvent = sortedEvents[index]
                 }
             }
             for index in 0..<overlappedIndexes.count{ //O(n)
