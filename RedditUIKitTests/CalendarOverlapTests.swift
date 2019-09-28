@@ -25,47 +25,57 @@ struct Event {
     
 }
 
-//MARK: These are not used...
+//MARK: These are used only for test cases...
 extension Event: Equatable{
     static func == (lhs: Event, rhs: Event) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.startTime == rhs.startTime && lhs.endTime==rhs.endTime
     }
 }
 
 extension Event: Hashable{
     func hash(into hasher: inout Hasher) {
         hasher.combine(id.hashValue)
+        hasher.combine(startTime.hashValue)
+        hasher.combine(endTime.hashValue)
     }
 }
 
 //When maintaining a calendar of events, it is important to know if an event overlaps with another event. Given a sequence of events, each having a start and end time, write a program that will return the sequence of all pairs of overlapping events.
 
-
-//MARK: Return Overlapped Event paris for the given Events. Complexity O(n log n)
+//MARK: Return Overlapped Event paris for the given Events. Time Complexity O(n log n), space complexity O(n)
+//Algorithm:
+//1. Sort the events in ascending order. O(n log n)
+//2. Find the overlapping pairs sequentially, if overlapped mark the indexes. O(n)
+//3. Return the events with marked indexes
+//Time complexity O(n log n). Space complexity O(n)
 func getOverlappedPairs(_ events: [Event]) -> [Event] {
     var overlappingEvents:[Event] = []
     if(events.count > 0){
-        let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //O(n log n))
-        var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count)
+        
+        let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //Sort the event O(n log n))
+        var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count) //Boolean Array to mark the overlappepd pair of indexes.
         var prvEvent = sortedEvents[0];
         var prvIndex = 0
+        //Find the overlapped events
         for index in 1..<sortedEvents.count{ //O(n)
             if(prvEvent.isOverlapping(sortedEvents[index])){
+                //Two events overlapped...mark the events
                 overlappedIndexes[prvIndex] = true
                 overlappedIndexes[index] = true
+                //move to the next event if it's endtime is after the previous event
                 if(prvEvent.endTime < sortedEvents[index].endTime){
                     prvIndex = index;
                     prvEvent = sortedEvents[index]
                 }
-                else{
-                    prvEvent.startTime = sortedEvents[index].startTime
-                }
             }
             else{
+                //No overlapping... move to the next event
                 prvIndex = index;
                 prvEvent = sortedEvents[index]
             }
         }
+        
+        //Copy the marked (overlapped) events to the result
         for index in 0..<overlappedIndexes.count{ //O(n)
             if overlappedIndexes[index] == true {
                 overlappingEvents.append(sortedEvents[index])
@@ -84,6 +94,15 @@ class CalendarOverlapTests: XCTestCase {
         let overlappingEvents = getOverlappedPairs(events)
         XCTAssertEqual(events, overlappingEvents)
     }
+    
+    func testOneEvent(){
+        var events = [Event]()
+        let date = Date()
+        events.append(Event(1, "test1", date, date+60*60)) //one hour
+        let overlappingEvents = getOverlappedPairs(events)
+        XCTAssertEqual([], overlappingEvents)
+    }
+    
     func testEdgeNoOverlaps(){
         var events = [Event]()
         let date = Date()
