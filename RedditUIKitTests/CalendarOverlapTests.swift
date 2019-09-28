@@ -25,6 +25,7 @@ struct Event {
     
 }
 
+//MARK: These are not used...
 extension Event: Equatable{
     static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id
@@ -37,42 +38,45 @@ extension Event: Hashable{
     }
 }
 
+//MARK: CalendarOverlap
 class CalendarOverlapTests: XCTestCase {
 
     func getOverlappedPairs(_ events: [Event]) -> [Event] {
-        let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //O(nlog(n))
-        var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count)
-        for event in sortedEvents{
-            print(event)
-        }
-        print("\n\n")
-        
         var overlappingEvents:[Event] = []
-        var anEvent = sortedEvents[0];
-        var prvIndex = 0
-        for index in 1..<sortedEvents.count{ //O(n)
-            if(anEvent.isOverlapping(sortedEvents[index])){
-                overlappedIndexes[prvIndex] = true
-                overlappedIndexes[index] = true
-                if(anEvent.endTime < sortedEvents[index].endTime){
+        if(events.count > 0){
+            let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //O(nlog(n))
+            var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count)
+            var anEvent = sortedEvents[0];
+            var prvIndex = 0
+            for index in 1..<sortedEvents.count{ //O(n)
+                if(anEvent.isOverlapping(sortedEvents[index])){
+                    overlappedIndexes[prvIndex] = true
+                    overlappedIndexes[index] = true
+                    if(anEvent.endTime < sortedEvents[index].endTime){
+                        prvIndex = index;
+                        anEvent = sortedEvents[index]
+                    }
+                    else{
+                        anEvent.startTime = sortedEvents[index].startTime
+                    }
+                }
+                else{
                     prvIndex = index;
                     anEvent = sortedEvents[index]
                 }
-                else{
-                    anEvent.startTime = sortedEvents[index].startTime
+            }
+            for index in 0..<overlappedIndexes.count{ //O(n)
+                if overlappedIndexes[index] == true {
+                    overlappingEvents.append(sortedEvents[index])
                 }
-            }
-            else{
-                prvIndex = index;
-                anEvent = sortedEvents[index]
-            }
-        }
-        for index in 0..<overlappedIndexes.count{ //O(n)
-            if overlappedIndexes[index] == true {
-                overlappingEvents.append(sortedEvents[index])
             }
         }
         return overlappingEvents
+    }
+    func testEmptyEvents(){
+        let events = [Event]()
+        let overlappingEvents = getOverlappedPairs(events)
+        XCTAssertEqual(events, overlappingEvents)
     }
     func testEdgeNoOverlaps(){
         var events = [Event]()
