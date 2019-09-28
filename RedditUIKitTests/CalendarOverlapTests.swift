@@ -40,7 +40,8 @@ extension Event: Hashable{
 
 //MARK: CalendarOverlap
 class CalendarOverlapTests: XCTestCase {
-
+    
+    //O(n log n) solution
     func getOverlappedPairs(_ events: [Event]) -> [Event] {
         var overlappingEvents:[Event] = []
         if(events.count > 0){
@@ -73,6 +74,8 @@ class CalendarOverlapTests: XCTestCase {
         }
         return overlappingEvents
     }
+
+//MARK: Test cases.
     func testEmptyEvents(){
         let events = [Event]()
         let overlappingEvents = getOverlappedPairs(events)
