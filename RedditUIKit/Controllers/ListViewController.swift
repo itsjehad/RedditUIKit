@@ -36,7 +36,7 @@ final class ListViewController: UIViewController {
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
 
-        viewModel.outputs.redditListings
+        viewModel.outputs.redditListingPosts
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items) { tableView, row, post in
                 return ViewControllerHelper.getCustomCell(post);
@@ -51,6 +51,7 @@ final class ListViewController: UIViewController {
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+        
         viewModel.outputs.isLoading
             .observeOn(MainScheduler.instance)
             .bind(to: indicatorView.rx.isAnimating)
@@ -73,12 +74,12 @@ final class ListViewController: UIViewController {
             .disposed(by: disposeBag)
 
         
-/*
+
         // Bind ViewModel Inputs
         tableView.rx.reachedBottom.asObservable()
             .bind(to: viewModel.inputs.reachedBottomTrigger)
             .disposed(by: disposeBag)
-*/
+        
         viewModel.inputs.fetchTrigger.onNext(())
         
     }

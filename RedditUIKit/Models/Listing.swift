@@ -19,6 +19,7 @@ struct Listing: Decodable {
     let data: ListingData
     struct ListingData: Decodable {
         let children: [PostData]
+        let after: String
     }
 }
 struct PostData: Decodable {

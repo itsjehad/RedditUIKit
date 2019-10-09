@@ -18,26 +18,23 @@ extension RedditApi {
 
         // MARK: - Initialize
         let topic: String
-        let id: String
-        let page: Int
         var after: String?
         var path: String = "/r/"
 
-        init(topic: String = "swift", page: Int, id: String = "") {
+        init(topic: String = "swift", after: String = "") {
             self.topic = topic
-            self.page = page
-            self.id = id
-            self.path += "\(topic)/\(id).json"
+            self.after = after
+            self.path += "\(topic).json"
         }
-/*
+
         var queryParameters: [String: Any]? {
             var params = [String: Any]()
-            if(id == ""){
-                    params["raw_json"] = "1"
+            if(after != ""){
+                params["after"] = after
             }
             return params
         }
-        
+/*
         var headerFields: [String: String] {
             var fields = [String: String]()
             if(id != ""){
@@ -58,13 +55,13 @@ extension RedditApi {
         let method: HTTPMethod = .get
         
 
-        func response(from object: Any, urlResponse: HTTPURLResponse) throws -> [PostData] {
+        func response(from object: Any, urlResponse: HTTPURLResponse) throws -> [Listing] {
             guard let data = object as? Data else {
                 throw ResponseError.unexpectedObject(object)
             }
             do{
                 let res = try JSONDecoder().decode(Listing.self, from: data)
-                return res.data.children;
+                return [res];
             }
             catch{
                     let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"

@@ -53,6 +53,8 @@ func getOverlappedPairs(_ events: [Event]) -> [Event] {
     if(events.count > 0){
         
         let sortedEvents = events.sorted(by: { $0.startTime < $1.startTime }) //Sort the event O(n log n))
+        print(events)
+        print(sortedEvents)
         var overlappedIndexes:[Bool] = Array(repeating: false, count: sortedEvents.count) //Boolean Array to mark the overlappepd pair of indexes.
         var prvEvent = sortedEvents[0];
         var prvIndex = 0
